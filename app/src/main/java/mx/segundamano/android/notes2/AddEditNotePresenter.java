@@ -13,9 +13,10 @@ public class AddEditNotePresenter {
         this.view = view;
     }
 
-    public void save(String note) {
+    public void save(final String note) {
         final NoteRealm noteRealm = new NoteRealm();
         noteRealm.note = note;
+
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
@@ -24,7 +25,9 @@ public class AddEditNotePresenter {
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
-                view.onNoteSaved("Saved!");
+                NoteViewModel viewModel = new NoteViewModel();
+                viewModel.note = note;
+                view.onNoteSaved(viewModel);
             }
         }, new Realm.Transaction.OnError() {
             @Override

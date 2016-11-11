@@ -42,8 +42,8 @@ public class NoteActivity extends AppCompatActivity implements AddEditNoteView {
     }
 
     @Override
-    public void onNoteSaved(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void onNoteSaved(NoteViewModel viewModel) {
+        Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
