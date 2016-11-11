@@ -3,6 +3,7 @@ package mx.segundamano.android.notes2;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -22,5 +23,14 @@ public class NoteActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.notes_activity_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.note_action_save)  {
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
