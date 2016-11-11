@@ -2,13 +2,11 @@ package mx.segundamano.android.notes2;
 
 import io.realm.Realm;
 
-public class AddEditNotePresenter implements Callback {
+public class AddEditNotePresenter implements AddEditCallback {
     private AddEditNoteModel model;
-    private Realm realm;
     private AddEditNoteView view;
 
-    public AddEditNotePresenter(Realm realm, AddEditNoteView view, AddEditNoteModel model) {
-        this.realm = realm;
+    public AddEditNotePresenter(AddEditNoteView view, AddEditNoteModel model) {
         this.view = view;
         this.model = model;
     }

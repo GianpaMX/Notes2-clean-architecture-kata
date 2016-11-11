@@ -12,7 +12,6 @@ import io.realm.Realm;
 public class NoteActivity extends AppCompatActivity implements AddEditNoteView {
 
     private EditText noteEditText;
-    private Realm realm;
     private AddEditNotePresenter presenter;
 
     @Override
@@ -22,9 +21,10 @@ public class NoteActivity extends AppCompatActivity implements AddEditNoteView {
 
         noteEditText = (EditText) findViewById(R.id.note_edit_text);
 
-        realm = Realm.getDefaultInstance();
-        AddEditNoteModel model = new AddEditNoteModel(realm);
-        presenter = new AddEditNotePresenter(realm, this, model);
+        Realm realm = Realm.getDefaultInstance();
+        NotesRepository repository = new RealmRepository(realm);
+        AddEditNoteModel model = new AddEditNoteModel(repository);
+        presenter = new AddEditNotePresenter(this, model);
     }
 
     @Override
