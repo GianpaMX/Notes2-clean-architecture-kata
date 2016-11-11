@@ -5,5 +5,5 @@ package mx.segundamano.android.notes2;
  */
 public interface AddEditNoteView {
     void onNoteSaved(NoteViewModel noteViewModel);
-    void onError(String error);
+    void onError(Throwable error);
 }

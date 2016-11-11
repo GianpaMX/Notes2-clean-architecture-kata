@@ -21,9 +21,10 @@ public class NoteActivity extends AppCompatActivity implements AddEditNoteView {
         setContentView(R.layout.note_activity);
 
         noteEditText = (EditText) findViewById(R.id.note_edit_text);
-        realm = Realm.getDefaultInstance();
 
-        presenter = new AddEditNotePresenter(realm, this);
+        realm = Realm.getDefaultInstance();
+        AddEditNoteModel model = new AddEditNoteModel(realm);
+        presenter = new AddEditNotePresenter(realm, this, model);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class NoteActivity extends AppCompatActivity implements AddEditNoteView {
     }
 
     @Override
-    public void onError(String error) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    public void onError(Throwable error) {
+        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 }
