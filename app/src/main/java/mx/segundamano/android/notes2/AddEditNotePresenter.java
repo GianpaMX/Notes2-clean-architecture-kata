@@ -1,27 +1,24 @@
 package mx.segundamano.android.notes2;
 
-import io.realm.Realm;
-
 public class AddEditNotePresenter implements AddEditCallback {
-    private AddEditNoteModel model;
+    private AddEditNoteUseCase model;
     private AddEditNoteView view;
 
-    public AddEditNotePresenter(AddEditNoteView view, AddEditNoteModel model) {
+    public AddEditNotePresenter(AddEditNoteView view, AddEditNoteUseCase model) {
         this.view = view;
         this.model = model;
     }
 
-    public void save(final String noteViewString) {
-        Note note = new Note();
-        note.body = noteViewString;
-
-        model.save(note, this);
+    public void save(String body) {
+        String requestModel = body;
+        model.save(requestModel, this);
     }
 
     @Override
     public void onSuccess(Note note) {
         NoteViewModel noteViewModel = new NoteViewModel();
         noteViewModel.body = note.body;
+        noteViewModel.date = note.date.toString();
 
         view.onNoteSaved(noteViewModel);
     }

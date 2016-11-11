@@ -23,7 +23,7 @@ public class NoteActivity extends AppCompatActivity implements AddEditNoteView {
 
         Realm realm = Realm.getDefaultInstance();
         NotesRepository repository = new RealmRepository(realm);
-        AddEditNoteModel model = new AddEditNoteModel(repository);
+        AddEditNoteUseCase model = new AddEditNoteUseCase(repository);
         presenter = new AddEditNotePresenter(this, model);
     }
 
@@ -44,7 +44,7 @@ public class NoteActivity extends AppCompatActivity implements AddEditNoteView {
 
     @Override
     public void onNoteSaved(NoteViewModel viewModel) {
-        Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Saved on " + viewModel.date, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -1,21 +1,27 @@
 package mx.segundamano.android.notes2;
 
+import java.util.Date;
+
 import io.realm.Realm;
 
-public class AddEditNoteModel implements RepositoryCallback {
+public class AddEditNoteUseCase implements RepositoryCallback {
     private NotesRepository repository;
     private AddEditCallback addEditCallback;
 
-    public AddEditNoteModel(NotesRepository repository) {
+    public AddEditNoteUseCase(NotesRepository repository) {
         this.repository = repository;
     }
 
-    public void save(final Note note, final AddEditCallback addEditCallback) {
+    public void save(String requestModel, final AddEditCallback addEditCallback) {
         this.addEditCallback = addEditCallback;
 
         /**
-         * Here would be bussines rules
+         * When saving a note, current date should be used
          */
+
+        Note note = new Note();
+        note.body = requestModel;
+        note.date = new Date();
 
         repository.persist(note, this);
     }

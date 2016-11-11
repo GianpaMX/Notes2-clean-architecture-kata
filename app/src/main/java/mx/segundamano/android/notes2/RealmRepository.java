@@ -1,5 +1,7 @@
 package mx.segundamano.android.notes2;
 
+import java.util.Date;
+
 import io.realm.Realm;
 
 public class RealmRepository implements NotesRepository {
@@ -13,6 +15,7 @@ public class RealmRepository implements NotesRepository {
     public void persist(Note note, final RepositoryCallback repositoryCallback) {
         final NoteRealm noteRealm = new NoteRealm();
         noteRealm.body = note.body;
+        noteRealm.timestamp = note.date.getTime();
 
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
@@ -24,6 +27,7 @@ public class RealmRepository implements NotesRepository {
             public void onSuccess() {
                 Note result = new Note();
                 result.body = noteRealm.body;
+                result.date = new Date(noteRealm.timestamp);
 
                 repositoryCallback.onSuccess(result);
             }
